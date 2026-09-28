@@ -2,7 +2,10 @@ package me.jhj.springdeveloper;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,6 +19,14 @@ public class MemberController {
     @GetMapping("/member")
     public List<Member> getAllMembers(){
         return memberService.getAllMembers();
+    }
 
+    //회원정보를 등록하는 요청
+    // http://localhost:8080/member
+    @PostMapping("/member")
+    public ResponseEntity<Member>createMember(@RequestBody Member member){
+        //비지니스 로직 호출
+        return ResponseEntity.ok(memberService.saveMember(member));
+        //같은 뜻 return ResponseEntity.status(HttpStatus.CREATED).body(memberService.saveMember(member));
     }
 }
