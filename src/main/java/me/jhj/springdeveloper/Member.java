@@ -6,7 +6,7 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.core.SpringVersion;
+
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -19,5 +19,9 @@ public class Member {
     private Long id;
     @Column(name="name", nullable = false)
     private String name;
+
+    public Member(String name) {
+        this.name = name;
+    }
 
 }
