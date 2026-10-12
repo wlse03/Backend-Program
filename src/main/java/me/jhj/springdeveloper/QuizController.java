@@ -12,7 +12,7 @@ public class QuizController {
             case 1:
                 return ResponseEntity.created(null).body("created"); //201
             case 2:
-                return ResponseEntity.badRequest().body("Bad"); //400
+                return ResponseEntity.badRequest().body("BadRequest"); //400
             default:
                 return ResponseEntity.ok().body("ok"); //200
         }
@@ -22,7 +22,7 @@ public class QuizController {
     public ResponseEntity<String> quiz2(@RequestBody Code code){
         switch (code.value()){
             case 1:
-                return ResponseEntity.status(403).body("created");
+                return ResponseEntity.status(403).body("Forbidden!");
             default:
                 return ResponseEntity.ok().body("ok");
         }
