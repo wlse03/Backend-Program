@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member,Long> {
+public interface MemberRepository extends JpaRepository<Member,Long> { //JPA에서 상속을 받아서 <관리할 클래스 이름, 그 엔티티의 기본기(@id) 타입> 형식을 나타냄
     // findAll() select * form member;
     // findById() select * from member where id = ?
     // deleteAll() delete from member;
