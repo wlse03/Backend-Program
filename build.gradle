@@ -9,7 +9,7 @@ version '1.0'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17) // java는 oracle jdk 17
+        languageVersion = JavaLanguageVersion.of(21) // java는 oracle jdk 17
     }
 }
 
@@ -37,4 +37,8 @@ dependencies {
     runtimeOnly 'com.h2database:h2' // 인메모리 데이터베이스
     compileOnly 'org.projectlombok:lombok' // 반복적인 메서드 작성 작업을 줄여주는 롬복
     annotationProcessor 'org.projectlombok:lombok'
+}
+tasks.named('test') {
+    useJUnitPlatform()
+    jvmArgs '-XX:+EnableDynamicAgentLoading'
 }
