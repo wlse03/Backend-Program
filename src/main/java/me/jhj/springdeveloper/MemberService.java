@@ -17,6 +17,7 @@ public class MemberService {
     public List<Member> getAllMembers(){
         return memberRepository.findAll();
     }
+
     //멤버저장
     public Member saveMember(Member member){
         return memberRepository.save(member);

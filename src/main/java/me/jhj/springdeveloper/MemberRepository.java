@@ -7,6 +7,7 @@ import java.util.List;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member,Long> {
+//    Member findByName(String name);
     // findAll() select * form member;
     // findById() select * from member where id = ?
     // deleteAll() delete from member;

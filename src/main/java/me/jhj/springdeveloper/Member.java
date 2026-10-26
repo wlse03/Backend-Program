@@ -2,10 +2,7 @@ package me.jhj.springdeveloper;
 
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,10 +15,12 @@ public class Member {
     @Column(name="id", updatable=false)
     private Long id;
     @Column(name="name", nullable = false)
-    private String name;
 
+    @Setter(AccessLevel.PUBLIC)
+    private String name;
     public Member(String name) {
         this.name = name;
     }
+
 
 }
