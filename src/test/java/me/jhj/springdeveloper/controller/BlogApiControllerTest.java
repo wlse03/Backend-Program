@@ -48,4 +48,17 @@ class BlogApiControllerTest {
         assertThat(article.getTitle()).isEqualTo(title);
         assertThat(article.getContent()).isEqualTo(content);
     }
+
+    @DisplayName("모든 블로그글 조회에 성공")
+    @Test
+    public void getArticle() throws Exception {
+        //준비 given url, data 준비
+        String url = "/api/articles";
+        String title = "11월 5일";
+        String content = "모든 블로그글 조회 테스트 코드 작성";
+        blogRepository.save(Article.builder().title(title).content(content).build());
+        //실행 when
+
+        //검증 then
+    }
 }
