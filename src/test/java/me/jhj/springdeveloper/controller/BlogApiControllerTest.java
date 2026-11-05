@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.jhj.springdeveloper.dao.Article;
 import me.jhj.springdeveloper.dto.ArticleCreationRequest;
 import me.jhj.springdeveloper.repository.BlogRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,9 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -29,6 +32,11 @@ class BlogApiControllerTest {
 
     @Autowired
     private BlogRepository blogRepository;
+
+    @AfterEach
+    public void cleanUp() {
+        blogRepository.deleteAll();
+    }
 
     @DisplayName("addArticle : 블로그 글 추가 성공")
     @Test
@@ -57,8 +65,13 @@ class BlogApiControllerTest {
         String title = "11월 5일";
         String content = "모든 블로그글 조회 테스트 코드 작성";
         blogRepository.save(Article.builder().title(title).content(content).build());
+
         //실행 when
+        ResultActions resultActions= mockMvc.perform(get(url).accept(MediaType.APPLICATION_JSON));
 
         //검증 then
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].title").value(title))
+                .andExpect(jsonPath("$[0].content").value(content));
     }
 }
