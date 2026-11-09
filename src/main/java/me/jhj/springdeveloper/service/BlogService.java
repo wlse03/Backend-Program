@@ -6,6 +6,7 @@ import me.jhj.springdeveloper.dto.ArticleCreationRequest;
 import me.jhj.springdeveloper.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,4 +23,14 @@ public class BlogService {
     public List<Article> findAll() {
         return blogRepository.findAll();
     }
+
+    public Article getById(@PathVariable Long id) {
+        return blogRepository.findById(id).get();
+    }
+
+    public void deleteById(@PathVariable Long id) {
+        blogRepository.deleteById(id);
+    }
 }
+
+
