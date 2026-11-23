@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class ExampleController {
     @GetMapping("/thymeleaf/example")
@@ -20,8 +24,10 @@ public class ExampleController {
         Person person = new Person();
         person.setAge(30);
         person.setName("홍길동");
+        person.setHobbies(List.of("독서","영화","음악","헬스"));
+        person.setBlogId(1L);
         model.addAttribute("person", person);
-
+        model.addAttribute("today", LocalDate.now());
         return "example";
     }
 }
@@ -31,4 +37,6 @@ public class ExampleController {
 class Person {
     private String name;
     private int age;
+    private List<String> hobbies;
+    private Long blogId;
 }
